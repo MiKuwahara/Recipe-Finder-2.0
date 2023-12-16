@@ -1,22 +1,16 @@
 const express = require('express')
 const router = express.Router()
+const {
+    getReviews,
+    postReview,
+    updateReview, 
+    deleteReview,
+} = require('../controllers/reviewController')
 
+//routes for get and post review
+router.route('/').get(getReviews).post(postReview)
 
-//get routes from review
-router.get('/', (req, res) => {
-    res.status(200).json({message: 'Get reviews'})
-})
-
-router.post('/', (req, res) => {
-    res.status(200).json({message: 'Post reviews'})
-})
-
-router.put('/:id', (req, res) => {
-    res.status(200).json({message: `Update review ${req.params.id}`})
-})
-
-router.delete('/:id', (req, res) => {
-    res.status(200).json({message: `Delete review ${req.params.id}`})
-})
+//routes for update and delete reviews
+router.route('/:id').put(updateReview).delete(deleteReview)
 
 module.exports = router
